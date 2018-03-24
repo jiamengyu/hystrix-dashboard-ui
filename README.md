@@ -15,7 +15,7 @@ To run locally:
 
 ````
 gradle clean build
-java -jar target/hystrix-dashboard-0.0.1.BUILD-SNAPSHOT.jar
+java -jar target/hystrix-dashboard-ws-0.0.1.BUILD-SNAPSHOT.jar
 ````
 
 In your browser, go to [http://localhost:8080/](http://localhost:8080/) # port configurable in `application.properties`
