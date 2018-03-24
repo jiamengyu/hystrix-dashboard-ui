@@ -2,6 +2,8 @@ package ca.itm.hystrix.dashboard;
 
 import java.io.UnsupportedEncodingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -17,7 +19,8 @@ import ca.itm.hystrix.dashboard.stream.MockStreamServlet;
 @EnableHystrixDashboard
 @Controller
 public class HystrixDashboardWsApplication {
-
+	private static final Logger logger = LoggerFactory.getLogger(HystrixDashboardWsApplication.class);
+	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		SpringApplication.run(HystrixDashboardWsApplication.class, args);
 
@@ -25,6 +28,8 @@ public class HystrixDashboardWsApplication {
 
 	@RequestMapping("/")
 	public String home() {
+		logger.info("Forward to default hystrix stream monitoring...");
+		
 		return "redirect:/hystrix/monitor?stream="+UriUtils.encode("http://localhost:8080/mock.stream","UTF-8")+"&title=Jiameng's Test";
 	}	
 	
