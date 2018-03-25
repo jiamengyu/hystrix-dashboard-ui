@@ -26,12 +26,12 @@ public class HystrixDashboardWsApplication {
 
 	}
 
-	@RequestMapping("/")
-	public String home() {
-		logger.info("Forward to default hystrix stream monitoring...");
-		
-		return "redirect:/hystrix/monitor?stream="+UriUtils.encode("http://localhost:8080/mock.stream","UTF-8")+"&title=Jiameng's Test";
-	}	
+//	@RequestMapping("/")
+//	public String home() {
+//		logger.info("Forward to default hystrix stream monitoring...");
+//		
+//		return "redirect:/hystrix/monitor?stream="+UriUtils.encode("http://localhost:8080/mock.stream","UTF-8")+"&title=Jiameng's Test";
+//	}	
 	
     @Bean
     public ServletRegistrationBean mockStreamServlet() {

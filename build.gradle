@@ -15,9 +15,10 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.example'
+group = 'ca.itm.hystrix'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -32,6 +33,11 @@ ext {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-websocket')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
+	compile('org.webjars:webjars-locator-core')
+	compile('org.webjars:sockjs-client:1.1.2')
+	compile('org.webjars:stomp-websocket:2.3.3')
+	compile('org.webjars:bootstrap:3.3.7')
+	compile('org.webjars:jquery:2.1.1')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
