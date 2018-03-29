@@ -1,4 +1,4 @@
-package ca.itm.hystrix.dashboard.stream;
+package ca.itm.hystrix.dashboard.mockstream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

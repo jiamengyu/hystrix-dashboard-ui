@@ -1,0 +1,8 @@
+applications:
+- name: hystrix-dashboard-ws
+  path: build\libs\hystrix-dashboard-ws-0.0.1-SNAPSHOT.jar
+  buildpack: java-buildpack-v3_11_custom
+  instances: 1
+  memory: 512M
+  routes: 
+   - route: hystrix-dashboard-ws.xgz0.bm.devfg.rbc.com

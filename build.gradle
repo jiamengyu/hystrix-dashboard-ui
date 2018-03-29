@@ -32,6 +32,7 @@ ext {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-websocket')
+	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
 	compile('org.webjars:webjars-locator-core')
 	compile('org.webjars:sockjs-client:1.1.2')
