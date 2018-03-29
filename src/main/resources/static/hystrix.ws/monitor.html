@@ -109,8 +109,10 @@
 			// ${contextPath}
 			var commandStream = "/proxy.stream?origin=" + stream;
 			var poolStream = "/proxy.stream?origin=" + stream;
+			var commandStream_ws = stream;
+			var poolStream_ws = stream;
 
-			$('#title_name').text("Common Payment Service -- API Circuit Breakers ")
+			$('#title_name').text("Common Payment Service - Circuit Breakers ")
 			
 		}
 		console.log("Command Stream: " + commandStream)
@@ -168,7 +170,7 @@
 				    
 				    stompClient.connect({}, function (frame) {
 				        console.log('Connected: ' + frame);
-				        stompClient.send("/app/hello", {}, JSON.stringify({'name': 'Hystrix UI'}));
+				        stompClient.send("/app/hello", {}, JSON.stringify({'stream': poolStream_ws }));
 				        stompClient.subscribe('/topic/greetings', dependencyThreadPoolMonitor.eventSourceMessageListener );
 				    });
 					
