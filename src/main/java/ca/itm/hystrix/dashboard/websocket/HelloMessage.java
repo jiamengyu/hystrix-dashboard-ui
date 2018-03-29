@@ -2,20 +2,20 @@ package ca.itm.hystrix.dashboard.websocket;
 
 public class HelloMessage {
 
-    private String name;
+    private String stream;
 
     public HelloMessage() {
     }
 
     public HelloMessage(String name) {
-        this.name = name;
+        this.stream = name;
     }
 
-    public String getName() {
-        return name;
+    public String getStream() {
+        return stream;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStream(String name) {
+        this.stream = name;
     }
 }

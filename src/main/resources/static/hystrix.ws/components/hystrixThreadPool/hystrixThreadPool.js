@@ -59,7 +59,7 @@
 		 * Event listener to handle new messages from EventSource as streamed from the server.
 		 */
 		/* public */ self.eventSourceMessageListener = function(e) {
-			var data = JSON.parse(e.data);
+			var data = JSON.parse(e.body);
 			if(data) {
 				// check for reportingHosts (if not there, set it to 1 for singleHost vs cluster)
 				if(!data.reportingHosts) {

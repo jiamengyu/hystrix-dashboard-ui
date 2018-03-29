@@ -11,7 +11,7 @@
 		function sendToMonitor() {
 			
 			if($('#stream').val().length > 0) {
-				var url = "/wshystrix/monitor.html?stream=" + encodeURIComponent($('#stream').val()) + "";
+				var url = "/hystrix.ws/monitor.html?stream=" + encodeURIComponent($('#stream').val()) + "";
 				if($('#delay').val().length > 0) {	
 					url += "&delay=" + $('#delay').val();
 				}

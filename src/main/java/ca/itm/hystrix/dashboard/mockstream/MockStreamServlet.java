@@ -45,7 +45,8 @@ public class MockStreamServlet extends HttpServlet {
         if (batchArg != null) {
             batch = Integer.parseInt(batchArg);
         }
-
+        
+        filename = "hystrix.stream";
         String data = getFileFromPackage(filename);
         String lines[] = data.split("\n");
 
@@ -87,6 +88,8 @@ public class MockStreamServlet extends HttpServlet {
     private String getFileFromPackage(String filename) {
         try {
             String file = "/" + this.getClass().getPackage().getName().replace('.', '/') + "/" + filename;
+            logger.debug("Attempt to load stream file: "+ file);
+            
             InputStream is = this.getClass().getResourceAsStream(file);
             try {
                 /* this is FAR too much work just to get a string from a file */

@@ -31,7 +31,7 @@ public class HystrixDashboardWsApplication {
 	public String home() {
 		logger.info("Forward to default hystrix stream monitoring...");
 		
-		return "redirect:/hystrix/monitor?stream="+UriUtils.encode("http://localhost:8080/mock.stream","UTF-8")+"&title=Jiameng's Test";
+		return "redirect:/hystrix.ws/monitor.html?stream="+UriUtils.encode("http://localhost:8080/mock.stream","UTF-8")+"&title=Demo";
 	}	
 	
     @SuppressWarnings({ "rawtypes", "unchecked" })

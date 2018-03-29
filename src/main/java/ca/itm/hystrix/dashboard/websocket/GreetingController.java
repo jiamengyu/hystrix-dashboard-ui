@@ -1,23 +1,21 @@
 package ca.itm.hystrix.dashboard.websocket;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriUtils;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import static org.springframework.web.reactive.function.BodyExtractors.toFlux;
 
 @Controller
 public class GreetingController {
@@ -26,39 +24,28 @@ public class GreetingController {
 	@Autowired
     private SimpMessageSendingOperations messagingTemplate;
     
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
+    @MessageMapping("/metrics")
+    @SendTo("/topic/hystrix.stream")
     public Greeting greeting(HelloMessage message) throws Exception {
     	
-        Thread.sleep(1000); // simulated delay
-        
-        //===============Flux part==============================
-		final Flux<Map<String, Integer>> stream = WebClient
-	            .create("http://localhost:8080")
-	            .get().uri("/mock.stream")
-	            .retrieve()
-	            .bodyToFlux(ServerSentEvent.class)
-	            .flatMap(sse -> Mono.justOrEmpty(sse.data()))
-	            .map(x -> (Map<String, Integer>)x);
+    	String streamUrl = UriUtils.decode(message.getStream(),"UTF-8");
+    	logger.info("Received Hystrix metrics request for " + streamUrl);
 
+    	final Flux<ServerSentEvent<JsonNode>> stream = WebClient
+	            .create()
+	            .get().uri( streamUrl )
+	            .exchange()
+	            .flatMapMany(response -> response.body(toFlux(
+						new ParameterizedTypeReference<ServerSentEvent<JsonNode>>() {})));
+		 
 	    stream.subscribe( sse ->{
-			logger.debug("Received: {}", sse );
-			messagingTemplate.convertAndSend("/topic/greetings", sse);
+			if (sse.data() != null ) {
+				logger.debug("Received: {}", sse );
+				messagingTemplate.convertAndSend("/topic/hystrix.stream", sse.data() );
+			}
 		});
-	  //===============Flux part==============================  
 	    
-        return new Greeting("Hello, " + message.getName() + "!");
+        return new Greeting("Starts streaming for " + message.getStream() + "!");
     }
 
-    @SendTo("/topic/greetings")
-    public String hystrixMetrics( String hystrixStream ) {
-    	return hystrixStream;
-    }
-    
-    private String extractData (Map<String, Integer> message) throws JSONException {
-    	JSONObject obj = new JSONObject(message);
-        obj = (JSONObject) obj.get("data");
-        return obj.toString();
-    }      
-    
 }
