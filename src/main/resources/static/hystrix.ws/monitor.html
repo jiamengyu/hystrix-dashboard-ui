@@ -1,18 +1,14 @@
 <!-- 
   Custom Hystrix Dashboard for STOMP over WebSocket instead of ServerSentEvent over http.  Leverage SockJS for old browser support.
-
-  Jiameng.Yu@rbc.com
-  03/28/2018
  -->
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>CPS Hystrix Monitor</title>
+	<title>Hystrix Monitor</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- Setup base for everything -->
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/global.css" />
 	<!-- Our custom CSS -->
 	<link rel="stylesheet" type="text/css" href="css/monitor.css" />
@@ -40,7 +36,6 @@
 </head>
 <body>
 	<div id="header">
-		<img alt="Logo" style="float: left!important;margin-top: 8px; margin-bottom: 8px;margin-left: 20px;" src="images/rbc-logo.svg" width="36" height="46">
 		<h2><span id="title_name"></span></h2>
 	</div>
 
@@ -112,7 +107,7 @@
 			var commandStream_ws = stream;
 			var poolStream_ws = stream;
 
-			$('#title_name').text("Common Payment Service - Circuit Breakers ")
+			$('#title_name').text("Hystrix Stream")
 			
 		}
 		console.log("Command Stream: " + commandStream)
