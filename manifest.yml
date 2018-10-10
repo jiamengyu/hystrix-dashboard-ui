@@ -5,4 +5,4 @@ applications:
   instances: 1
   memory: 512M
   routes: 
-   - route: hystrix-dashboard-ws.xgz0.bm.devfg.rbc.com
+   - route: hystrix-dashboard-ws.xyz0.bm.dev.com
